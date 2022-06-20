@@ -2,10 +2,10 @@ import pyautogui as pt
 from time import sleep
 
 
-def locate_tree():  # ideal fov: 82
-    position = pt.locateOnScreen('images/tree.png', confidence=.2)
+def locate_tree():
+    position = pt.locateOnScreen('images/tree.png', confidence=.4)
     if position is None:
-        print("tree no found :(")
+        print("tree not found :(")
         return False
     else:
         print("tree found!!!")
@@ -26,36 +26,32 @@ def attack(duration):
     sleep(.1)
 
 
-loop_duration = 4
+loop_duration = 50
 
 sleep(3)
 
-# ideal fov: 82
+# fov: 82
 
 while loop_duration != 0:
-    sleep(5)
+    sleep(2)
 
-    # logging stuff
-    print("MOUSE POS: ", pt.position())
-
-    # no clue why it needs to be done this way
-    pt.moveRel(164.5, 0, duration=1)  # in game sensitivity = 50%; raw input OFF; 800dpi
+    pt.moveRel(163.5, 0, duration=1)  # ig sensitivity = 50%; raw input OFF; 800dpi
 
     if locate_tree():
 
-        move('w', 1.5)  # moves forward 5 blocks
+        move('w', 1.5)
 
         # axe: 1st slot; shears/hoe: 2nd slot; saplings: 3rd slot
         pt.keyDown('2')
         pt.keyUp('2')
 
-        attack(0.15)  # breaks leaves
+        attack(0.15)
         attack(0.15)
 
         pt.keyDown('1')
         pt.keyUp('1')
 
-        move('w', .6)  # moves closer to the tree
+        move('w', .6)
 
         # diamond axe: 0.5s;  hands: 3.2s (approx)
         attack(0.5)
@@ -72,7 +68,7 @@ while loop_duration != 0:
         pt.moveRel(0, 1000, duration=.5)
         pt.click(button='right')
         pt.moveRel(0, -295, duration=.5)
-        move('s', 1.39)
+        move('s', 1.29)
 
     loop_duration -= 1
 
